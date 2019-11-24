@@ -35,14 +35,21 @@ class Home extends Component {
   onChange(e){
     let currentList= [];
     let newList= [];
+    //if the searchbar isn't empty
     if (e.target.value !== '') {
+      //assign the original list to currentList
+      //use filter method to determine which items should be displayed
       currentList= this.state.marvelCharacters
       newList= currentList.filter(item => {
         const marvList= item.name.toLowerCase()
         const filter = e.target.value.toLowerCase()
+         // check to see if the current list item includes the search term
+        // If it does, it will be added to newList. Using lowercase eliminates
+        // issues with capitalization in search terms and search content
         return marvList.includes(filter)
       })
     } else {
+      // If the search bar is empty, set newList to original task list
       newList = this.state.marvelCharacters
     }
     this.setState({
