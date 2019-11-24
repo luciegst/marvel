@@ -46,9 +46,6 @@ class Navbar extends Component {
       <ul className={ulClass}>
         <li className="navlink">
           <a className="link" href='/home'>Marvel characters</a>
-        </li> 
-        <li className="navlink">
-          <a className="link" href='/details'>Details</a>
         </li>  
       </ul>
       <div className={divClass}>

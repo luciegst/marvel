@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import './Home.css';
 import { Container, Row, Col } from 'reactstrap';
 import MarvelCard from './MarvelCard';
-import SearchBar from './SearchBar';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       marvelCharacters: [],
+      filtered: [],
       }
+      this.onChange = this.onChange.bind(this)
   }
 
 
@@ -20,12 +21,38 @@ class Home extends Component {
         .then(data => {
              this.setState({
               marvelCharacters: data.data.results,
+              filtered: data.data.results
             }); 
         });
 } 
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      filtered: nextProps.data
+    })
+  }
+
+  onChange(e){
+    let currentList= [];
+    let newList= [];
+    if (e.target.value !== '') {
+      currentList= this.state.marvelCharacters
+      newList= currentList.filter(item => {
+        const marvList= item.name.toLowerCase()
+        const filter = e.target.value.toLowerCase()
+        return marvList.includes(filter)
+      })
+    } else {
+      newList = this.state.marvelCharacters
+    }
+    this.setState({
+      filtered: newList
+    })
+  }
+
+
   render() { 
-    const listFilter = this.state.marvelCharacters
+    const listFilter = this.state.filtered
     return (
       <div>
         <Container>
@@ -34,7 +61,13 @@ class Home extends Component {
           </Row>
           <Row>
             <Col>
-            <SearchBar />
+            <form className="search">
+            <input 
+            type="text" 
+            placeholder="Search.." 
+            onChange={this.onChange}
+            ></input>
+            </form>
             </Col>
           </Row>
           <Row>
