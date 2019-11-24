@@ -1,0 +1,15 @@
+.card-marvel {
+  width: 100%;
+  margin-top: 20px;
+}
+.marvel-name {
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+.show-resume {
+  display: block;
+}
+.dont-show-resume {
+  display: none;
+}
